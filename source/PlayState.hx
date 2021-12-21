@@ -401,21 +401,31 @@ class PlayState extends MusicBeatState
 					add(stageCurtains);
 				}
 
-			case 'spooky': //Week 2
+			case 'stage': //Week 2
+				var bg:BGSprite = new BGSprite('stageback2', -600, -200, 0.9, 0.9);
+				add(bg);
+
+				var stageFront:BGSprite = new BGSprite('stagefront2', -650, 600, 0.9, 0.9);
+				stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
+				stageFront.updateHitbox();
+				add(stageFront);
+
 				if(!ClientPrefs.lowQuality) {
-					halloweenBG = new BGSprite('halloween_bg', -200, -100, ['halloweem bg0', 'halloweem bg lightning strike']);
-					halloweenBG.setGraphicSize(Std.int(halloweenBG.width * 2));
-					halloweenBG.updateHitbox();
-				} else {
-					halloweenBG = new BGSprite('halloween_bg_low', -200, -100);
-				}
-				add(halloweenBG);
+					var stageLight:BGSprite = new BGSprite('stage_light2', -125, -100, 0.9, 0.9);
+					stageLight.setGraphicSize(Std.int(stageLight.width * 1.1));
+					stageLight.updateHitbox();
+					add(stageLight);
+					var stageLight:BGSprite = new BGSprite('stage_light2', 1225, -100, 0.9, 0.9);
+					stageLight.setGraphicSize(Std.int(stageLight.width * 1.1));
+					stageLight.updateHitbox();
+					stageLight.flipX = true;
+					add(stageLight);
 
-				halloweenWhite = new BGSprite(null, -FlxG.width, -FlxG.height, 0, 0);
-				halloweenWhite.makeGraphic(Std.int(FlxG.width * 3), Std.int(FlxG.height * 3), FlxColor.WHITE);
-				halloweenWhite.alpha = 0;
-				halloweenWhite.blend = ADD;
-
+					var stageCurtains:BGSprite = new BGSprite('stagecurtains2', -500, -300, 1.3, 1.3);
+					stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
+					stageCurtains.updateHitbox();
+					add(stageCurtains);
+				
 				//PRECACHE SOUNDS
 				CoolUtil.precacheSound('thunder_1');
 				CoolUtil.precacheSound('thunder_2');
@@ -928,6 +938,14 @@ class PlayState extends MusicBeatState
 		iconP2.visible = !ClientPrefs.hideHud;
 		add(iconP2);
 		reloadHealthBarColors();
+
+        var creditTxt:FlxText = new FlxText(4,healthBarBG.y + 20,0,("Port by Tricky The [%ERROR%]"), 24); 
+        creditTxt.scrollFactor.set(); 
+        creditTxt.setFormat("VCR OSD Mono", 24, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK); 
+        creditTxt.borderColor = FlxColor.BLACK; 
+        creditTxt.borderSize = 3; 
+        creditTxt.borderStyle = FlxTextBorderStyle.OUTLINE; 
+        add(creditTxt);
 
 		scoreTxt = new FlxText(0, healthBarBG.y + 36, FlxG.width, "", 20);
 		scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
